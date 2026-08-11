@@ -30,7 +30,7 @@ def load_full_database(index_dir):
             if fulldb is None:
                 fulldb = db_subset
             else:
-                fulldb = fulldb.append(db_subset, ignore_index=True)
+                fulldb = pd.concat([fulldb, db_subset], ignore_index=True)
     time2 = time.time()
     time_diff = time2-time0
     print(f"Loading full db took {time_diff} seconds")

@@ -97,7 +97,7 @@ def save_top_N_params(curr_iter, configfn, ntop, outdir, overwrite=True):
         if df_all is None:
             df_all = df
         else:
-            df_all = df_all.append(df, ignore_index=True)
+            df_all = pd.concat([df_all, df], ignore_index=True)
         
     save_top_N_params_from_df(df_all, config, ntop, outdir, overwrite)
 

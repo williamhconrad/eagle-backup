@@ -112,7 +112,7 @@ def run_topN_BuriedUnsatHbonds_all(curr_iter, configfn, ntop, outdir):
         if df_all is None:
             df_all = df
         else:
-            df_all = df_all.append(df, ignore_index=True)
+            df_all = pd.concat([df_all, df], ignore_index=True)
         
     df_all.sort_values(by='dG', inplace=True, ignore_index=True)
     print(df_all.head())

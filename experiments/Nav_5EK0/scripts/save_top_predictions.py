@@ -82,7 +82,7 @@ def save_top_tranche(tid2l, database_dir, prediction_dir, outfn, ntops=10000, fi
         if top_df is None:
             top_df = merged_df
         else:
-            top_df = top_df.append(merged_df, ignore_index=True)
+            top_df = pd.concat([top_df, merged_df], ignore_index=True)
             top_df = top_df.nlargest(ntops, 'p_hits', keep='all')
           
     top_df.reset_index(drop=True, inplace=True)

@@ -20,7 +20,7 @@ iter="${iter:-$1}"
 
 # Crux defaults OMP_NUM_THREADS to 256, which thrashes on a
 # 128-core node. PyTorch CPU training wants one thread per physical core.
-export OMP_NUM_THREADS=${OMP_NUM_THREADS:-128}
+export OMP_NUM_THREADS=128
 
 source ~/.bashrc
 conda activate openvs

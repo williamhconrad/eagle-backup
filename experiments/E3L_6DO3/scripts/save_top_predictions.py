@@ -51,7 +51,7 @@ def save_top_files(dbfns, outfn, ntops=10000, fileformat="feather", molid_header
         if top_df is None:
             top_df = df
         else:
-            top_df = top_df.append(df, ignore_index=True)
+            top_df = pd.concat([top_df, df], ignore_index=True)
 
         top_df.drop_duplicates(subset=molid_header, keep='first', inplace=True, ignore_index=True)
         if excl_zincids is not None:
@@ -130,7 +130,7 @@ def save_random_files(dbfns, outfn, nkeep=10000, fileformat="feather", molid_hea
             if cutoff is not None:
                 df = df.loc[df['p_hits']>=cutoff]
             df_sample = df.sample( min(nsample, len(df)), replace=False, ignore_index=True )
-            df_keep = df_keep.append(df_sample, ignore_index=True)
+            df_keep = pd.concat([df_keep, df_sample], ignore_index=True)
 
     # just to make sure there is no duplicates
     df_keep.drop_duplicates(subset=molid_header, keep='first', inplace=True, ignore_index=True)

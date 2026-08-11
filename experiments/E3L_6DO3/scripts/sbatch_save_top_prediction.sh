@@ -19,7 +19,7 @@ cd "${PBS_O_WORKDIR:-$(pwd)}" || exit 1
 iter="${iter:-$1}"
 
 # Crux defaults OMP_NUM_THREADS to 256 (logical); cap at 128 physical cores.
-export OMP_NUM_THREADS=${OMP_NUM_THREADS:-128}
+export OMP_NUM_THREADS=128
 
 source ~/.bashrc
 conda activate openvs

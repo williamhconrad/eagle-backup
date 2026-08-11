@@ -29,7 +29,7 @@ def load_cluster_fp_db(fps_path):
             if fulldb is None:
                 fulldb = db_subset
             else:
-                fulldb = fulldb.append(db_subset, ignore_index=True)
+                fulldb = pd.concat([fulldb, db_subset], ignore_index=True)
     return fulldb
 
 def load_top_prediction_db(top_prediction_path):

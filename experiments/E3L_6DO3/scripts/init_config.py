@@ -251,7 +251,5 @@ def main(database=""):
         init_configfn_zinc22_database()
 
 if __name__ == "__main__":
-    database = "real"
-    main(database)
     database = "cluster"
     main(database)
