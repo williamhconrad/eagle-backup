@@ -14,14 +14,16 @@
 # PBS Pro starts jobs in $HOME, not the submission directory.
 cd "${PBS_O_WORKDIR:-$(pwd)}" || exit 1
 
-# Crux defaults OMP_NUM_THREADS to 256. These array tasks run
-# several independent processes via GNU parallel, so pin to 1.
+# Crux defaults OMP_NUM_THREADS to 256. Each array task runs several
+# independent processes via GNU parallel, so pin to 1.
 export OMP_NUM_THREADS=1
 
-source ~/.bashrc
+source "${CONDA_BASE:-$HOME/miniconda3}/etc/profile.d/conda.sh"
+conda activate openvs
 
-# PBS Pro exposes the array index as $PBS_ARRAY_INDEX (SLURM: $SLURM_ARRAY_TASK_ID).
-# Default to 1 so the script still works if run as a plain (non-array) job.
+# PBS Pro exposes the array index as $PBS_ARRAY_INDEX
+# (SLURM: $SLURM_ARRAY_TASK_ID). Default to 1 so the script also works
+# when submitted as a plain, non-array job.
 TASK_ID="${PBS_ARRAY_INDEX:-1}"
 CMD=$(head -n "$TASK_ID" E3L_6DO3_dock.joblist | tail -n 1)
 exec ${CMD}

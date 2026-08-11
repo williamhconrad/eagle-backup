@@ -53,8 +53,8 @@ def gen_flags_target_tar(prefix, src_tar, outdir, batch_size=100):
             print("Saved: %s"%outparamfn)
 
 def gen_flags_deepdock(batch_size=100):
-    prefix="train1" 
-    project_name="E3L_6DO3"
+    prefix="validation" 
+    project_name="Nav_5EK0"
     src_tar = os.path.join("params", f"{prefix}_params_0.tar")
     outdirname = f"{project_name}_{prefix}_chunk{batch_size}"
     outpath = os.path.join(os.getcwd(), "inputs", f"{prefix}set", outdirname)
@@ -64,5 +64,5 @@ def gen_flags_deepdock(batch_size=100):
     gen_flags_target_tar(prefix, src_tar, outpath, batch_size)
     
 if __name__=="__main__":
-    gen_flags_deepdock(2)
+    gen_flags_deepdock(4)
 

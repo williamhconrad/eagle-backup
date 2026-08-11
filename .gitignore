@@ -1,0 +1,36 @@
+# --- molecule libraries (tens of GB - never commit) ---
+databases/
+!databases/README
+
+# --- generated working data ---
+experiments/*/scratch/
+experiments/*/models/
+
+# --- screening output: ignore run results, KEEP *_reference baselines ---
+experiments/*/screening/outputs/**
+!experiments/*/screening/outputs/*/
+!experiments/*/screening/outputs/*/*_reference/
+!experiments/*/screening/outputs/*/*_reference/**
+
+# --- regenerated job artifacts ---
+*.joblist
+*.joblist.rerun
+*.cmdlist
+*_cmdlistfn/
+*_cmdlistfn_rerun/
+cmdlistfns/
+fpfilelist/
+smiles_iter*/
+debug_gen3d/
+
+# --- job logs ---
+output.*.log
+*.o[0-9]*
+*.e[0-9]*
+
+# --- python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.crux-pbs-*
+*.bak

@@ -25,7 +25,8 @@ cd "${{PBS_O_WORKDIR:-$(pwd)}}" || exit 1
 # independent processes via GNU parallel, so pin to 1.
 export OMP_NUM_THREADS=1
 
-source ~/.bashrc
+source "${{CONDA_BASE:-$HOME/miniconda3}}/etc/profile.d/conda.sh"
+conda activate openvs
 
 # PBS Pro exposes the array index as $PBS_ARRAY_INDEX
 # (SLURM: $SLURM_ARRAY_TASK_ID). Default to 1 so the script also works
