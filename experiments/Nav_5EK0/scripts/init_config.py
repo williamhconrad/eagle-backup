@@ -9,7 +9,9 @@ EXP_PATH = os.path.join(ROOT_PATH, "experiments")
 PROJ_NAME = "Nav_5EK0"
 SCRATCH_PATH = os.path.join(EXP_PATH, PROJ_NAME, "scratch")
 RESULTS_PATH = os.path.join(EXP_PATH, PROJ_NAME, "screening", "outputs")
-DB_PATH = os.path.join(ROOT_PATH, "databases")
+# Molecule libraries may live outside the repo (e.g. a shared project
+# directory). Set OPENVS_DB_PATH to override; defaults to ./databases
+DB_PATH = os.environ.get("OPENVS_DB_PATH", os.path.join(ROOT_PATH, "databases"))
 
 
 

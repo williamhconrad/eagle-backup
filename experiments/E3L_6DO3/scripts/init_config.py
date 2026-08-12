@@ -9,7 +9,9 @@ EXP_PATH = os.path.join(ROOT_PATH, "experiments")
 PROJ_NAME = "E3L_6DO3"
 SCRATCH_PATH = os.path.join(EXP_PATH, PROJ_NAME, "scratch")
 RESULTS_PATH = os.path.join(EXP_PATH, PROJ_NAME, "screening", "outputs")
-DB_PATH = os.path.join(ROOT_PATH, "databases")
+# Molecule libraries may live outside the repo (e.g. a shared project
+# directory). Set OPENVS_DB_PATH to override; defaults to ./databases
+DB_PATH = os.environ.get("OPENVS_DB_PATH", os.path.join(ROOT_PATH, "databases"))
 
 
 
@@ -251,5 +253,7 @@ def main(database=""):
         init_configfn_zinc22_database()
 
 if __name__ == "__main__":
+    database = "real"
+    main(database)
     database = "cluster"
     main(database)

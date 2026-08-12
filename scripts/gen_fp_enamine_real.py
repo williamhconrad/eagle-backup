@@ -120,6 +120,7 @@ def convert_enamine_real_db_smifns(inbasedir, outbasedir, mode="pbs"):
 
 if __name__ == "__main__":
     mode = "multiprocess"
-    inbasedir = "../databases/real/smiles/split"
-    outbasedir = "../databases/real/fingerprints/split"
+    db_root = os.environ.get("OPENVS_DB_PATH", "../databases")
+    inbasedir = os.path.join(db_root, "real", "smiles", "split")
+    outbasedir = os.path.join(db_root, "real", "fingerprints", "split")
     convert_enamine_real_db_smifns(inbasedir, outbasedir, mode)

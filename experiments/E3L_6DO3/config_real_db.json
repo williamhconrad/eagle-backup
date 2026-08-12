@@ -1,11 +1,9 @@
 {
   "project_name": "E3L_6DO3",
   "project_path": "/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/OpenVS-main/experiments/E3L_6DO3",
-  "params_basedir": "/lus/eagle/projects/marP_TB_VLS/shared_databases/centroids",
-  "index_dir_params": "/lus/eagle/projects/marP_TB_VLS/shared_databases/centroids/index",
-  "smiles_path": "/lus/eagle/projects/marP_TB_VLS/shared_databases/centroids/smiles",
-  "fps_path": "/lus/eagle/projects/marP_TB_VLS/shared_databases/centroids/fingerprints",
-  "database_type": "full",
+  "smiles_path": "/lus/eagle/projects/marP_TB_VLS/shared_databases/real/smiles/split",
+  "fps_path": "/lus/eagle/projects/marP_TB_VLS/shared_databases/real/fingerprints/split",
+  "database_type": "real",
   "train_size": 10,
   "test_size": 10,
   "val_size": 10,
@@ -37,11 +35,11 @@
   "weight_class": true,
   "result_path": "/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/OpenVS-main/experiments/E3L_6DO3/screening/outputs",
   "model_path": "/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/OpenVS-main/experiments/E3L_6DO3/models",
-  "prediction_path": "/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/OpenVS-main/experiments/E3L_6DO3/scratch/predictions",
+  "prediction_path": "/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/OpenVS-main/experiments/E3L_6DO3/scratch/predictions_real_db",
   "new_smiles_path": "/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/OpenVS-main/experiments/E3L_6DO3",
   "new_traindata_path": "/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/OpenVS-main/experiments/E3L_6DO3",
   "disable_progress_bar": true,
-  "extract_rawmol2_path": "/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/OpenVS-main/experiments/E3L_6DO3/scratch/mol2s",
+  "mol2_path": "/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/OpenVS-main/experiments/E3L_6DO3/scratch/mol2s",
   "project_tempdir": "/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/OpenVS-main/experiments/E3L_6DO3/scratch",
   "concat_tar_path": "/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/OpenVS-main/experiments/E3L_6DO3/scratch/results"
 }
