@@ -18,9 +18,14 @@ from openvs.utils.crux import make_pbs_cluster, adapt_cluster
 
 
 def valid_molid(molid):
-    if molid.startswith('Z') or molid.startswith('P'):
-        return True
-    return False
+    # Enamine catalogue IDs start Z/P; the REAL Samples files use s_/m_
+    # synthon-style IDs instead. Note the '|' guard: ~8% of rows carry a
+    # CXSMILES extension block (e.g. "CC(N)C |&1:1|") whose embedded space
+    # shifts columns under str.split(), which is what the fields[2]
+    # fallback below recovers from.
+    if molid.startswith('|'):
+        return False
+    return molid.startswith(('Z', 'P', 's_', 'm_'))
 
 def convert_enamine_smifn_to_fpfn_wrapper(inargs):
     return convert_enamine_smifn_to_fpfn(*inargs)

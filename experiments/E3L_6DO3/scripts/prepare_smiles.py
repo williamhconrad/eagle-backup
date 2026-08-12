@@ -35,7 +35,7 @@ def extract_smiles_from_db_file(dbfn, outdir, prefix,  molid_header="molecule_id
         smi = df['smiles'][i]
         molid = df[molid_header][i]
         # skip invalid molids
-        if not ( molid.startswith('Z') or molid.startswith('PV')):
+        if not molid.startswith(('Z', 'P', 's_', 'm_')):
             continue
         smi = f'{smi} {molid}\n'
         contents.append(smi)
