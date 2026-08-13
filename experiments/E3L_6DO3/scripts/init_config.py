@@ -253,7 +253,10 @@ def main(database=""):
         init_configfn_zinc22_database()
 
 if __name__ == "__main__":
-    database = "real"
-    main(database)
-    database = "cluster"
-    main(database)
+    # Which configs to write. With no arguments, write them all.
+    #   python init_config.py                -> real + cluster
+    #   python init_config.py cluster        -> centroids only (Phase 1)
+    #   python init_config.py real           -> Enamine REAL only (Phase 2)
+    import sys
+    for database in (sys.argv[1:] or ["real", "cluster"]):
+        main(database)
