@@ -8,7 +8,8 @@ from glob import glob
 import numpy as np
 import pandas as pd
 # rdkit stuff
-from rdkit import Chem
+from rdkit import Chem, RDLogger
+RDLogger.DisableLog('rdApp.*')
 from rdkit.Chem import AllChem
 
 from dask import compute, delayed
