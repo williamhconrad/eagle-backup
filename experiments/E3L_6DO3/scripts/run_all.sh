@@ -26,11 +26,11 @@ submit() {
 set -e
 
 curr_iter=1
-prev_jobid=$(submit sbatch_gather_vs_results.sh $curr_iter)
-echo sbatch_gather_vs_results.sh $prev_jobid
+#prev_jobid=$(submit sbatch_gather_vs_results.sh $curr_iter)
+#echo sbatch_gather_vs_results.sh $prev_jobid
 
-#prev_jobid=$(submit sbatch_augment_results.sh $curr_iter)
-#echo sbatch_augment_results.sh $prev_jobid
+prev_jobid=$(submit sbatch_augment_results.sh $curr_iter)
+echo sbatch_augment_results.sh $prev_jobid
 
 #prev_jobid=$(submit sbatch_train.sh $curr_iter -o output.train.$curr_iter.log)
 #echo sbatch_train.sh $prev_jobid

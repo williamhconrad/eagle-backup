@@ -181,7 +181,7 @@ def gen_joblist_production(project_name, extra, batch_size = 100, cmd_size=1*16,
 if __name__ == '__main__':
     project_name = 'E3L_6DO3'
     currfolder="train1"
-    batch_size=2
+    batch_size=50
     cmd_size = 1*64  # 64 concurrent docks/node: memory-bound
                      # (SLURM asked 20g for 5 procs = ~4GB each; 256GB/4 = 64),
                      # not core-bound (128 cores available)

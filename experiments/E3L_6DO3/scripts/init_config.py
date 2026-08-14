@@ -32,9 +32,9 @@ def init_configfn_cluster_database():
     config_path = os.path.join(project_path, "config_clusterdb.json")
     prediction_path = os.path.join( SCRATCH_PATH, "predictions")
 
-    ntrain = 10
-    ntest = 10
-    nval = 10
+    ntrain = 16000
+    ntest  = 32000
+    nval   = 32000
     max_iter = 10
 
     prefix = PROJ_NAME

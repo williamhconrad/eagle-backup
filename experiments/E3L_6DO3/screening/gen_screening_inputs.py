@@ -64,5 +64,5 @@ def gen_flags_deepdock(batch_size=100):
     gen_flags_target_tar(prefix, src_tar, outpath, batch_size)
     
 if __name__=="__main__":
-    gen_flags_deepdock(2)
+    gen_flags_deepdock(50)
 
