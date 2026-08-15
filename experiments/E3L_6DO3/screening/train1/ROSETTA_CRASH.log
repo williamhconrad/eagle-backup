@@ -1,0 +1,86 @@
+##############################################################################################################
+#
+# Rosetta crash log. Please submit the contents of this file to http://crash.rosettacommons.org/
+# or use the script Rosetta/main/source/scripts/python/public/report_crashes.py
+#
+
+[START_CRASH_REPORT]
+[ROSETTA_VERSION]: 2026.32+main.fa5ce20989
+[COMMIT_DATE]: 2026-08-07T17:34:48
+[APPLICATION]: UNKNOWN APPLICATION
+[MODE]: Release
+[EXTRAS]: default
+[OS]: GNU/Linux
+[COMPILER]: GCC version "7.5.0"
+[STDLIB]: libstdc++ version 20191114
+[START_OPTIONS]
+NO OPTIONS SPECIFIED
+
+[END_OPTIONS]
+
+[START_BACKTRACE]: RAW_LIBC
+/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/rosetta/source/build/src/release/linux/6.4/64/x86/gcc/7/default/libutility.so(backtrace_string[abi:cxx11](int)+0x43) [0x7f217e373683]
+/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/rosetta/source/build/src/release/linux/6.4/64/x86/gcc/7/default/libutility.so(utility::excn::Exception::Exception(char const*, int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)+0xd3) [0x7f217e3b7293]
+/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/rosetta/source/build/src/release/linux/6.4/64/x86/gcc/7/default/libutility.so(utility::options::OptionCollection::load_options_from_file_exception(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)+0x225) [0x7f217e4ac235]
+/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/rosetta/source/build/src/release/linux/6.4/64/x86/gcc/7/default/libutility.so(utility::options::OptionCollection::load(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::list<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >&, bool)+0x47a) [0x7f217e4ac7fa]
+/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/rosetta/source/build/src/release/linux/6.4/64/x86/gcc/7/default/libutility.so(utility::options::OptionCollection::load(int, char* const*, bool)+0x180) [0x7f217e4acf40]
+/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/rosetta/source/build/src/release/linux/6.4/64/x86/gcc/7/default/libcore.6.so(core::init::init_options(int, char**)+0x1f) [0x7f218310922f]
+/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/rosetta/source/build/src/release/linux/6.4/64/x86/gcc/7/default/libcore.6.so(core::init::init(int, char**)+0x27) [0x7f218310d327]
+/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/rosetta/source/bin/rosetta_scripts.linuxgccrelease() [0x4040dc]
+/lib64/libc.so.6(+0x40eec) [0x7f217cbddeec]
+/lib64/libc.so.6(__libc_start_main+0x87) [0x7f217cbddfb5]
+/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/rosetta/source/bin/rosetta_scripts.linuxgccrelease() [0x404761]
+
+[END_BACKTRACE]
+
+[FILE]: src/utility/options/OptionCollection.cc
+[LINE]: 572
+[START_MESSAGE]
+Option file open failed for: '..//flags_params_train1_0_0.flags'
+
+[END_MESSAGE]
+[END_CRASH_REPORT]
+
+##############################################################################################################
+#
+# Rosetta crash log. Please submit the contents of this file to http://crash.rosettacommons.org/
+# or use the script Rosetta/main/source/scripts/python/public/report_crashes.py
+#
+
+[START_CRASH_REPORT]
+[ROSETTA_VERSION]: 2026.32+main.fa5ce20989
+[COMMIT_DATE]: 2026-08-07T17:34:48
+[APPLICATION]: UNKNOWN APPLICATION
+[MODE]: Release
+[EXTRAS]: default
+[OS]: GNU/Linux
+[COMPILER]: GCC version "7.5.0"
+[STDLIB]: libstdc++ version 20191114
+[START_OPTIONS]
+NO OPTIONS SPECIFIED
+
+[END_OPTIONS]
+
+[START_BACKTRACE]: RAW_LIBC
+/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/rosetta/source/build/src/release/linux/6.4/64/x86/gcc/7/default/libutility.so(backtrace_string[abi:cxx11](int)+0x43) [0x7f1d5e23b683]
+/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/rosetta/source/build/src/release/linux/6.4/64/x86/gcc/7/default/libutility.so(utility::excn::Exception::Exception(char const*, int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)+0xd3) [0x7f1d5e27f293]
+/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/rosetta/source/build/src/release/linux/6.4/64/x86/gcc/7/default/libutility.so(utility::options::OptionCollection::load_options_from_file_exception(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)+0x225) [0x7f1d5e374235]
+/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/rosetta/source/build/src/release/linux/6.4/64/x86/gcc/7/default/libutility.so(utility::options::OptionCollection::load(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::list<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >&, bool)+0x47a) [0x7f1d5e3747fa]
+/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/rosetta/source/build/src/release/linux/6.4/64/x86/gcc/7/default/libutility.so(utility::options::OptionCollection::load(int, char* const*, bool)+0x180) [0x7f1d5e374f40]
+/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/rosetta/source/build/src/release/linux/6.4/64/x86/gcc/7/default/libcore.6.so(core::init::init_options(int, char**)+0x1f) [0x7f1d62fd122f]
+/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/rosetta/source/build/src/release/linux/6.4/64/x86/gcc/7/default/libcore.6.so(core::init::init(int, char**)+0x27) [0x7f1d62fd5327]
+/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/rosetta/source/bin/rosetta_scripts.linuxgccrelease() [0x4040dc]
+/lib64/libc.so.6(+0x40eec) [0x7f1d5caa5eec]
+/lib64/libc.so.6(__libc_start_main+0x87) [0x7f1d5caa5fb5]
+/lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/rosetta/source/bin/rosetta_scripts.linuxgccrelease() [0x404761]
+
+[END_BACKTRACE]
+
+[FILE]: src/utility/options/OptionCollection.cc
+[LINE]: 572
+[START_MESSAGE]
+Option file open failed for: '..//flags_params_train1_0_0.flags'
+
+[END_MESSAGE]
+[END_CRASH_REPORT]
+

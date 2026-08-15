@@ -36,3 +36,7 @@ __pycache__/
 *.bak
 core.*
 *.core
+experiments/*/screening/inputs/
+ROSETTA_CRASH.log
+ROSETTA_CRASH.log
+experiments/*/screening/params/

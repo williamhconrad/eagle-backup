@@ -1,5 +1,6 @@
 import os,sys
 import tarfile
+from glob import glob
 
 
 def gen_flags_target_tar(prefix, src_tar, outdir, batch_size=100):
@@ -44,7 +45,16 @@ def gen_flags_target_tar(prefix, src_tar, outdir, batch_size=100):
                     
                     ligandlines.append(ligandID+"\n")
             print("Saved: %s"%tarfilepath)
-            flagslines.append("-in:file:extra_res_fa "+tarfilepath+"\n")
+            # Rosetta 2026.x silently ignores a .tar passed to
+            # -in:file:extra_res_fa: every ligand is skipped with
+            # "No residue info found" and it re-docks the crystal ligand
+            # instead, reporting success. List the .params files directly.
+            paramsdir = tarfilepath[:-4] + "_params"
+            os.makedirs(paramsdir, exist_ok=True)
+            with tarfile.open(tarfilepath) as _ptar:
+                _ptar.extractall(paramsdir)
+            pfns = sorted(glob(os.path.join(paramsdir, "**", "*.params"), recursive=True))
+            flagslines.append("-in:file:extra_res_fa " + " ".join(pfns) + "\n")
             with open(outligandfn, 'w') as outf:
                 outf.writelines(ligandlines)
             print("Saved: %s"%outligandfn)
@@ -53,7 +63,7 @@ def gen_flags_target_tar(prefix, src_tar, outdir, batch_size=100):
             print("Saved: %s"%outparamfn)
 
 def gen_flags_deepdock(batch_size=100):
-    prefix="train1" 
+    prefix="validation" 
     project_name="E3L_6DO3"
     src_tar = os.path.join("params", f"{prefix}_params_0.tar")
     outdirname = f"{project_name}_{prefix}_chunk{batch_size}"

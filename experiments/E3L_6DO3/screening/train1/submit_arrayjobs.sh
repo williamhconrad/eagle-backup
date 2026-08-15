@@ -1,3 +1,2 @@
 #!/bin/bash
-# SLURM: sbatch -a 1-1%50 sbatch_dock_arrayjobs.sh
-qsub sbatch_dock_arrayjobs.sh
+qsub -r y -J 1-5%10 sbatch_dock_arrayjobs.sh

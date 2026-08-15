@@ -28,23 +28,18 @@ CONCURRENT=10          # workq allows 10 running jobs per project
 log() { echo "[$(date '+%F %T')] $*"; }
 
 wait_for_job() {
-    local jid="$1"
-    log "waiting on $jid (polling every ${POLL_SECONDS}s)"
+    local num="${1%%.*}"; num="${num%%[*}"
+    log "waiting on job $num (polling every ${POLL_SECONDS}s)"
+    sleep 30
     while true; do
-        # qstat exits non-zero once the job has left the queue entirely
-        if ! qstat "$jid" >/dev/null 2>&1; then
-            log "  $jid no longer in queue"
-            return 0
-        fi
-        local state
-        state=$(qstat -f "$jid" 2>/dev/null | awk -F= '/job_state/{gsub(/ /,"",$2); print $2; exit}')
-        if [ "$state" = "F" ]; then
-            log "  $jid finished"
-            return 0
-        fi
+        n=$(qstat -u "$USER" 2>/dev/null | awk -v j="$num" '
+            { id=$1; sub(/[\[.].*$/, "", id); if (id == j) c++ }
+            END { print c+0 }')
+        [ "$n" -eq 0 ] && { log "  job $num finished"; return 0; }
         sleep "$POLL_SECONDS"
     done
 }
+
 
 for PREFIX in train1 test validation; do
     log "================ $PREFIX ================"
@@ -58,17 +53,17 @@ for PREFIX in train1 test validation; do
 
     python gen_screening_inputs.py || { log "ERROR: gen_screening_inputs failed"; exit 1; }
 
-    cd train1 || exit 1
-    python gen_joblist_production.py || { log "ERROR: gen_joblist_production failed"; exit 1; }
+    cd "$PREFIX" || exit 1
+    python gen_joblist_production.py "$PREFIX" || { log "ERROR: gen_joblist_production failed"; exit 1; }
 
     N=$(wc -l < E3L_6DO3_dock.joblist)
     if [ "$N" -lt 1 ]; then log "ERROR: empty joblist for $PREFIX"; exit 1; fi
     log "$PREFIX -> $N array tasks"
 
     if [ "$N" -gt 1 ]; then
-        SUBMIT="qsub -J 1-${N}%${CONCURRENT} sbatch_dock_arrayjobs.sh"
+        SUBMIT="qsub -r y -J 1-${N}%${CONCURRENT} sbatch_dock_arrayjobs.sh"
     else
-        SUBMIT="qsub sbatch_dock_arrayjobs.sh"     # 1-element arrays are not portable
+        SUBMIT="qsub -r y sbatch_dock_arrayjobs.sh"     # 1-element arrays are not portable
     fi
     echo "#!/bin/bash"      > submit_arrayjobs.sh
     echo "$SUBMIT"         >> submit_arrayjobs.sh
