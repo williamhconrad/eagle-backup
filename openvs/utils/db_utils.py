@@ -266,8 +266,7 @@ def extract_raw3dfns_for_dbfn(dbfn:str, outdir:str,
     if mode =="pbs":
         cluster_obj = make_pbs_cluster(memory_per_worker="3GB",
                                        walltime="3:00:00",
-                                       job_name="extract_worker",
-                                       worker_extra_args=["--no-nanny", "--no-bokeh"])
+                                       job_name="extract_worker")
         adapt_cluster(cluster_obj, wait_count=400)
         client = Client(cluster_obj)
         print("Using PBS clusters:")

@@ -63,8 +63,7 @@ def convert_enamine_real_db_smifns(inbasedir, outbasedir, mode="pbs"):
     if mode=="pbs":
         cluster_obj = make_pbs_cluster(memory_per_worker="10GB",
                                        walltime="12:00:00",
-                                       job_name="gen_fp",
-                                       worker_extra_args=["--no-nanny", "--no-bokeh"])
+                                       job_name="gen_fp")
         adapt_cluster(cluster_obj, wait_count=400)
         client = Client(cluster_obj)
         print("Using PBS clusters:")

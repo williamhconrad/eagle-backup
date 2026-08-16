@@ -13,6 +13,7 @@ This module instead packs many dask workers onto each node and scales out in
 Reference: https://docs.alcf.anl.gov/crux/queueing-and-running-jobs/running-jobs/
 """
 
+import os
 import re
 
 # ---------------------------------------------------------------------------
@@ -28,7 +29,9 @@ import re
 # workload is compute-bound and gains little from hyperthreads.
 # ---------------------------------------------------------------------------
 CRUX_PROJECT = "marP_TB_VLS"
-CRUX_QUEUE = "workq-route"          # routing queue -> executes in `workq`
+# Workers inherit the queue from the environment so a parent submitted to
+# `preemptable` puts its workers there too. Set OPENVS_QUEUE to override.
+CRUX_QUEUE = os.environ.get("OPENVS_QUEUE", "workq-route")          # routing queue -> executes in `workq`
 CRUX_FILESYSTEMS = "home:eagle"     # required by ALCF; adjust if you use others
 CRUX_CORES_PER_NODE = 128           # dual 64-core EPYC 7742 (256 logical)
 CRUX_NODE_MEMORY_GB = 256           # confirmed: 2 x 128 GB DDR4

@@ -106,9 +106,9 @@ def init_configfn_real_database():
     fps_path = os.path.join(DB_PATH, "real", "fingerprints", "split")
     prediction_path = os.path.join( SCRATCH_PATH, "predictions_real_db")
 
-    ntrain = 10
-    ntest = 10
-    nval = 10
+    ntrain = 16000
+    ntest  = 32000
+    nval   = 32000
     max_iter = 10
 
     prefix = PROJ_NAME
@@ -180,9 +180,9 @@ def init_configfn_zinc22_database():
     fps_path = os.path.join(DB_PATH, "zinc", "zinc22", "fingerprints")
     prediction_path = os.path.join( SCRATCH_PATH, "predictions_zinc22_db")
 
-    ntrain = 10
-    ntest = 10
-    nval = 10
+    ntrain = 16000
+    ntest  = 32000
+    nval   = 32000
     max_iter = 10
 
     prefix = PROJ_NAME

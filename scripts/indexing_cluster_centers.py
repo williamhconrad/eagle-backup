@@ -162,8 +162,7 @@ def indexing_all_am1bcc_mol2s(outdir):
     
     cluster_obj = make_pbs_cluster(memory_per_worker="5GB",
                                    walltime="10:00:00",
-                                   job_name="indexing",
-                                   worker_extra_args=["--no-nanny", "--no-bokeh"])
+                                   job_name="indexing")
     adapt_cluster(cluster_obj, wait_count=400)
     client = Client(cluster_obj)
     print("Using PBS clusters:")
@@ -181,8 +180,7 @@ def indexing_all_params(outrootdir):
     
     cluster_obj = make_pbs_cluster(memory_per_worker="30GB",
                                    walltime="10:00:00",
-                                   job_name="indexing",
-                                   worker_extra_args=["--no-nanny", "--no-bokeh"])
+                                   job_name="indexing")
     adapt_cluster(cluster_obj, wait_count=400)
     client = Client(cluster_obj)
     print("Using PBS clusters:")
@@ -210,8 +208,7 @@ def indexing_all_params_pandas(outdir, mode='mp'):
     if mode == 'pbs':
         cluster_obj = make_pbs_cluster(memory_per_worker="30GB",
                                        walltime="10:00:00",
-                                       job_name="indexing",
-                                       worker_extra_args=["--no-nanny", "--no-bokeh"])
+                                       job_name="indexing")
         adapt_cluster(cluster_obj, wait_count=400)
         client = Client(cluster_obj)
         print("Using PBS clusters:")

@@ -69,9 +69,9 @@ def load_model(model, args: PredictArgs, model_args: VanillaModelArgs=None):
         model.to(device)
         print(f"Loaded model {modelfn}")
         if not torch.cuda.is_available():
-            ckpt = torch.load(modelfn, map_location=torch.device('cpu'))
+            ckpt = torch.load(modelfn, map_location=torch.device('cpu'), weights_only=False)
         else:
-            ckpt = torch.load(modelfn)
+            ckpt = torch.load(modelfn, weights_only=False)
         model.load_state_dict(ckpt['model_state_dict'])
         metrics = ["accuracys", "precisions", "recalls", "efs", "roc_auc"]
         for metric in  metrics:
@@ -183,10 +183,9 @@ def predict_database(args: PredictArgs, model_args: VanillaModelArgs, config):
         use_pbs = True
         device = torch.device("cpu")
         args.disable_progress_bar = True # if use PBS clusters, turn off progress bar!
-        cluster_obj = make_pbs_cluster(memory_per_worker="10GB",
+        cluster_obj = make_pbs_cluster(memory_per_worker="2GB",
                                        walltime="12:00:00",
-                                       job_name="predict_worker",
-                                       worker_extra_args=["--no-nanny", "--no-bokeh"])
+                                       job_name="predict_worker")
         adapt_cluster(cluster_obj, wait_count=400)
         client = Client(cluster_obj)
         print("Using PBS clusters:")

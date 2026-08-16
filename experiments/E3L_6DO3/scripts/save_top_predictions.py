@@ -29,13 +29,17 @@ def save_top_files(dbfns, outfn, ntops=10000, fileformat="feather", molid_header
     if excl_dbfns is not None:
         for dbfn in excl_dbfns:
             df = pd.read_feather(dbfn)
-            if molid_header not in df:
-                print(f"molecule id column {molid_header} is not in {dbfn}, skip")
+            # Augmented docking results name the id column 'zincid'; the
+            # prediction files use 'molecule_id'. Accept whichever exists.
+            col = next((c for c in (molid_header, 'zincid', 'molecule_id')
+                        if c in df), None)
+            if col is None:
+                print(f"no molecule id column in {dbfn}, skip")
                 continue
             if excl_zincids is None:
-                excl_zincids = set(df[molid_header])
+                excl_zincids = set(df[col])
             else:
-                excl_zincids.update(set(df[molid_header]))
+                excl_zincids.update(set(df[col]))
 
     top_df = None
     for dbfn in dbfns:
@@ -93,13 +97,17 @@ def save_random_files(dbfns, outfn, nkeep=10000, fileformat="feather", molid_hea
     if excl_dbfns is not None:
         for dbfn in excl_dbfns:
             df = pd.read_feather(dbfn)
-            if molid_header not in df:
-                print(f"molecule id column {molid_header} is not in {dbfn}, skip")
+            # Augmented docking results name the id column 'zincid'; the
+            # prediction files use 'molecule_id'. Accept whichever exists.
+            col = next((c for c in (molid_header, 'zincid', 'molecule_id')
+                        if c in df), None)
+            if col is None:
+                print(f"no molecule id column in {dbfn}, skip")
                 continue
             if excl_zincids is None:
-                excl_zincids = set(df[molid_header])
+                excl_zincids = set(df[col])
             else:
-                excl_zincids.update(set(df[molid_header]))
+                excl_zincids.update(set(df[col]))
 
     df_keep = None
     nsample = ceildiv(nkeep, len(dbfns))
@@ -161,7 +169,7 @@ def save_top_all_realdb(i_iter, configfn, mode, dockflex=False, batchsize=None, 
     prediction_path = config['prediction_path']
     prediction_path = os.path.join(prediction_path, f"model_{i_iter}_prediction")
     if mode =="pbs":
-        cluster_obj = make_pbs_cluster(memory_per_worker="10GB",
+        cluster_obj = make_pbs_cluster(memory_per_worker="2GB",
                                        walltime="12:00:00",
                                        job_name="save_top_worker")
         adapt_cluster(cluster_obj, wait_count=400)

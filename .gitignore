@@ -40,3 +40,4 @@ experiments/*/screening/inputs/
 ROSETTA_CRASH.log
 ROSETTA_CRASH.log
 experiments/*/screening/params/
+*.bak
