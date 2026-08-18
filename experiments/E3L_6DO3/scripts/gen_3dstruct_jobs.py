@@ -19,6 +19,8 @@ def write_sbatchfn(sbatchfn, submitfn, joblistfn, n_jobs, cwd="./", job_name="ar
 #PBS -l place=scatter
 #PBS -l filesystems=home:eagle
 #PBS -l walltime=06:30:00
+# PBS Pro requires array jobs to be rerunnable; Crux defaults to -r n.
+#PBS -r y
 #PBS -N {jobname}
 #PBS -o output.{jobname}.log
 #PBS -j oe
@@ -48,11 +50,11 @@ exec ${{CMD}}
     script_base = os.path.basename(sbatchfn)
     # SLURM job arrays (-a 1-N) become PBS Pro job arrays (-J 1-N).
     if n_jobs > 1:
-        submit_line = "qsub -J 1-{} -W max_run_subjobs=8 {}".format(n_jobs, script_base)
+        submit_line = "qsub -r y -J 1-{} -W max_run_subjobs=8 {}".format(n_jobs, script_base)
     else:
         # A single-element job array is not portable across PBS Pro
         # versions, so submit it as an ordinary job instead.
-        submit_line = "qsub {}".format(script_base)
+        submit_line = "qsub -r y {}".format(script_base)
     submit_content = "#!/bin/bash\n# SLURM: sbatch -a 1-{} {}\n{}\n".format(
             n_jobs, script_base, submit_line)
     with open(submitfn, 'w') as outf:
