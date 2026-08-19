@@ -1,5 +1,5 @@
 #!/bin/bash -l
-#PBS -q workq-route
+#PBS -q preemptable
 #PBS -A marP_TB_VLS
 # Crux allocates whole nodes; ncpus/mem chunks from the SLURM original do not
 # apply here (dual 64-core EPYC 7742 = 128 cores, 256 GB per node).

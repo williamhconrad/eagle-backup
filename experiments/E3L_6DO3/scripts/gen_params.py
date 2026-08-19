@@ -9,7 +9,7 @@ def gen_params_iteration(i_iter, configfn, chargemodel='mmff94', multimol2=False
     if not os.path.exists(indir):
         raise Exception(f"{indir} doesn't exist.")
     outdir = os.path.join(config['project_tempdir'], "params", f"train{i_iter}_params" )
-    gen_params_from_folder(indir, outdir, mode='pbs', 
+    gen_params_from_folder(indir, outdir, mode='multiprocessing', 
                             overwrite=False, nopdb=True, 
                             mol2gen_app=None, multimol2=multimol2, 
                             infer_atomtypes=infer_atomtypes,

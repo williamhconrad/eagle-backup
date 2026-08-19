@@ -8,10 +8,11 @@ def load_configfn(configfn):
     return config
 
 def write_sbatchfn(sbatchfn, submitfn, joblistfn, n_jobs, cwd="./", job_name="arrayjobs", queue='cpu'):
+    pbsqueue = os.environ.get('OPENVS_QUEUE', 'workq-route')
 
     if queue == 'cpu':   
         sbatch_content = """#!/bin/bash -l
-#PBS -q workq-route
+#PBS -q {pbsqueue}
 #PBS -A marP_TB_VLS
 # Crux allocates whole nodes; ncpus/mem chunks from the SLURM original do not
 # apply here (dual 64-core EPYC 7742 = 128 cores, 256 GB per node).
@@ -41,7 +42,7 @@ conda activate openvs
 TASK_ID="${{PBS_ARRAY_INDEX:-1}}"
 CMD=$(head -n "$TASK_ID" {joblistfn} | tail -n 1)
 exec ${{CMD}}
-""".format(jobname=job_name, joblistfn=joblistfn, cwd=cwd)
+""".format(jobname=job_name, joblistfn=joblistfn, cwd=cwd, pbsqueue=pbsqueue)
  
     with open(sbatchfn, 'w') as outf:
         outf.write(sbatch_content)
@@ -84,7 +85,10 @@ def gen_joblist(smipath, outdir):
     return joblist
 
 def gen3d_joblist_from_smipath(smipath, mol2outdir, jobname="gen3d", overwrite=False):
-    queue="cpu"
+    # PBS queue for the emitted array job. Override with $OPENVS_QUEUE;
+    # the guard below still keys off the literal 'cpu', so keep that
+    # variable named separately from the queue actually written out.
+    queue = "cpu"
     joblist_lines = gen_joblist(smipath, mol2outdir)
     
     joblist_fn = os.path.join("./", f"{jobname}.joblist" )
