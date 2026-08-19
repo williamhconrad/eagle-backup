@@ -37,7 +37,9 @@ PY
 fi
 
 hr; echo "2. DOCKING OUTPUT"
-for s in train1 test validation train${ITER}; do
+SETS="train1 test validation"
+[ "$ITER" != "1" ] && SETS="$SETS train${ITER}"
+for s in $SETS; do
     d="$EXP/screening/outputs/${PROJ}_${s}/${PROJ}_VSX"
     [ -d "$d" ] || continue
     n=$(ls "$d"/*.score.sc 2>/dev/null | wc -l)

@@ -84,6 +84,21 @@ n_par=$(ls "$PDIR" 2>/dev/null | wc -l)
 [ "$n_par" -gt 100 ] || die "only $n_par params in $PDIR - run cycle $((ITER-1)) first"
 log "  GATE OK: $n_par params for round $ITER"
 
+# Skip the whole docking block if this round is already docked and tarred.
+DOCKED="$EXP/screening/outputs/${PROJ}_train${ITER}/${PROJ}_VSX"
+n_done=$(grep -h '^SCORE:' "$DOCKED"/*.score.sc 2>/dev/null \
+         | awk '$2!="total_score" && $(NF-1)!="LG1"{print $(NF-1)}' | sort -u | wc -l)
+n_want=$(ls "$EXP/scratch/params/train${ITER}_params" 2>/dev/null | wc -l)
+n_min=$(( n_want * 90 / 100 ))          # allow 10% attrition
+if [ "$n_done" -ge "$n_min" ] && [ "$n_min" -gt 0 ] \
+   && [ -f "$EXP/scratch/results/${PROJ}_train${ITER}.tar" ]; then
+    log "--- docking round $ITER already done ($n_done of $n_want ligands), skipping to stage 1"
+    SKIP_DOCK=1
+else
+    SKIP_DOCK=0
+fi
+
+if [ "$SKIP_DOCK" -eq 0 ]; then
 log "--- packaging params"
 cd "$EXP/scratch/params" || die "no scratch/params"
 TARF="$EXP/screening/params/train${ITER}_params_0.tar"
@@ -148,6 +163,8 @@ log "  GATE OK: results tarred"
 
 # ============================================================ STAGES 1 - 5
 cd "$SCRIPTS" || die
+
+fi   # end SKIP_DOCK block
 
 log "--- stage 1: gather (iter=$ITER)"
 G="$EXP/screening/outputs/${PROJ}_train${ITER}_vs_results.feather"

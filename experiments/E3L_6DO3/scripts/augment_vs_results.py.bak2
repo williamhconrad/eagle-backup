@@ -49,19 +49,6 @@ def load_top_prediction_db(top_prediction_path):
     return fulldb
     
 
-def _molid_from_ligandname(name):
-    """Recover the database id from a docking ligandname.
-
-    Centroids/ZINC names look like ZINC000119504072_DE_174, where the id is
-    the part before the first underscore. Enamine REAL names look like
-    m_280710____43739026____31672232____31732540 and ARE the id already --
-    splitting those on '_' yields just 'm' or 's', which matches nothing.
-    """
-    if name.startswith(("s_", "m_")):
-        return name
-    return name.split('_')[0]
-
-
 def collect_info_block_helper(inargs):
     return collect_info_block(*inargs)
 
@@ -71,7 +58,7 @@ def collect_info_block(infn, dbfn, index_column="zincid", fps_column="fp_hexstri
     if index_column in df.columns:
         pass
     elif index_column not in df.columns and 'ligandname' in df.columns:
-        df[index_column] = df['ligandname'].map(_molid_from_ligandname)
+        df[index_column] = df['ligandname'].map(lambda x: x.split('_')[0])
     elif index_column not in df.columns and 'ligandname' not in df.columns:
         raise Exception(f"Neither {index_column} nor ligandname exists.")
     keys = set(df[index_column])
@@ -148,7 +135,7 @@ def collect_info_helper(inpdfn, dbfns, index_column="molecule_id", fps_column="f
     if index_column in indf.columns:
         pass
     elif index_column not in indf.columns and 'ligandname' in indf.columns:
-        indf[index_column] = indf['ligandname'].map(_molid_from_ligandname)
+        indf[index_column] = indf['ligandname'].map(lambda x: x.split('_')[0])
     elif index_column not in indf.columns and 'ligandname' not in indf.columns:
         raise Exception(f"Neither {index_column} nor ligandname exists.")
     zincids1 = set(indf[index_column])
