@@ -81,7 +81,9 @@ def collect_info_block(infn, dbfn, index_column="zincid", fps_column="fp_hexstri
     keys_common = set(db.index) & keys
     if not keys_common:
         return None
-    df = db.loc[keys_common][['smiles', fps_column]]
+    # pandas 2 rejects a set as an indexer ('Use a list instead'), which
+    # pandas 1.x accepted. keys_common is a set intersection.
+    df = db.loc[sorted(keys_common)][['smiles', fps_column]]
     df.reset_index(inplace=True)
     return df
 
@@ -209,7 +211,7 @@ def add_fps_column(inpdfn, outpdfn, infulldb, molid_header="zincid", recompute_f
     if molid_header in df.columns:
         pass
     elif molid_header not in df.columns and 'ligandname' in df.columns:
-        df[molid_header] = df['ligandname'].map(lambda x: x.split('_')[0])
+        df[molid_header] = df['ligandname'].map(_molid_from_ligandname)
     elif molid_header not in df.columns and 'ligandname' not in df.columns:
         raise Exception(f"Neither {molid_header} nor ligandname exists.")
     fulldb = infulldb.drop_duplicates(

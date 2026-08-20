@@ -121,7 +121,10 @@ df=pd.DataFrame(rows,columns=["ligandname","dG","set"]).drop_duplicates("ligandn
 
 # join predictions if the ids share a namespace
 ph={}
-top=os.path.join(exp,"scratch","predictions_real_db",f"model_{it}_prediction",
+# Molecules docked in round N were selected by model_{N-1}, so that is
+# where their p_hits live.
+sel = max(1, int(it) - 1)
+top=os.path.join(exp,"scratch","predictions_real_db",f"model_{sel}_prediction",
                  "top_predictions","all.top.feather")
 if os.path.exists(top):
     p=pd.read_feather(top); ph=dict(zip(p.molecule_id,p.p_hits))

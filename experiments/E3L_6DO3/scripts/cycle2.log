@@ -2069,3 +2069,236 @@ Wrote: ./submit_arrayjobs.sh
 
 [2026-08-19 14:55:02] GATE FAILED: augment produced no E3L_6DO3_train2_vs_results.aug.feather
 [2026-08-19 14:55:02] fix the cause, then re-run: bash run_cycle.sh 2
+[2026-08-19 16:13:07] =========== CYCLE 2  (dock round 2, leaves train3_params) ===========
+[2026-08-19 16:13:07] queue=preemptable  walltime=06:00:00
+[2026-08-19 16:13:07] --- prechecks for docking round 2
+[2026-08-19 16:13:07]   GATE OK: 16362 params for round 2
+[2026-08-19 16:13:13] --- docking round 2 already done (16362 of 16362 ligands), skipping to stage 1
+[2026-08-19 16:13:13] --- stage 1: gather (iter=2)
+[2026-08-19 16:13:13]   removing stale E3L_6DO3_train2_vs_results.feather
+[2026-08-19 16:13:13]   qsub sbatch_gather_vs_results.sh (iter=2) -> output.gather.iter2.log
+[2026-08-19 16:13:13]   job id: 251505.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+[2026-08-19 16:13:13]   waiting on job 251505
+[2026-08-19 16:15:43]   job 251505 finished
+[2026-08-19 16:15:43]   GATE OK: E3L_6DO3_train2_vs_results.feather
+[2026-08-19 16:15:43] --- stage 2: augment (iter=2)
+[2026-08-19 16:15:43]   qsub sbatch_augment_results.sh (iter=2) -> output.augment.iter2.log
+[2026-08-19 16:15:44]   job id: 251507.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+[2026-08-19 16:15:44]   waiting on job 251507
+[2026-08-19 16:18:14]   job 251507 finished
+
+[2026-08-19 16:18:14] GATE FAILED: augment produced no E3L_6DO3_train2_vs_results.aug.feather
+[2026-08-19 16:18:14] fix the cause, then re-run: bash run_cycle.sh 2
+[2026-08-19 16:23:16] =========== CYCLE 2  (dock round 2, leaves train3_params) ===========
+[2026-08-19 16:23:17] queue=preemptable  walltime=06:00:00
+[2026-08-19 16:23:17] --- prechecks for docking round 2
+[2026-08-19 16:23:17]   GATE OK: 16362 params for round 2
+[2026-08-19 16:23:17] --- docking round 2 already done (16362 of 16362 ligands), skipping to stage 1
+[2026-08-19 16:23:17] --- stage 1: gather (iter=2)
+[2026-08-19 16:23:17]   removing stale E3L_6DO3_train2_vs_results.feather
+[2026-08-19 16:23:17]   qsub sbatch_gather_vs_results.sh (iter=2) -> output.gather.iter2.log
+[2026-08-19 16:23:17]   job id: 251508.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+[2026-08-19 16:23:17]   waiting on job 251508
+[2026-08-19 16:25:47]   job 251508 finished
+[2026-08-19 16:25:47]   GATE OK: E3L_6DO3_train2_vs_results.feather
+[2026-08-19 16:25:47] --- stage 2: augment (iter=2)
+[2026-08-19 16:25:47]   qsub sbatch_augment_results.sh (iter=2) -> output.augment.iter2.log
+[2026-08-19 16:25:48]   job id: 251509.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+[2026-08-19 16:25:48]   waiting on job 251509
+[2026-08-19 16:28:18]   job 251509 finished
+[2026-08-19 16:28:18]   GATE OK: E3L_6DO3_train2_vs_results.aug.feather
+[2026-08-19 16:28:18] --- stage 3: train (iter=2)
+[2026-08-19 16:28:18]   qsub sbatch_train.sh (iter=2) -> output.train.iter2.log
+[2026-08-19 16:28:18]   job id: 251510.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+[2026-08-19 16:28:18]   waiting on job 251510
+bash: ash: command not found
+bash: bbash: command not found
+[2026-08-19 16:42:14] =========== CYCLE 2  (dock round 2, leaves train3_params) ===========
+[2026-08-19 16:42:14] queue=preemptable  walltime=06:00:00
+[2026-08-19 16:42:14] --- prechecks for docking round 2
+[2026-08-19 16:42:14]   GATE OK: 16362 params for round 2
+[2026-08-19 16:42:15] --- docking round 2 already done (16362 of 16362 ligands), skipping to stage 1
+[2026-08-19 16:42:15] --- stage 1: gather (iter=2)
+[2026-08-19 16:42:15]   removing stale E3L_6DO3_train2_vs_results.feather
+[2026-08-19 16:42:15]   qsub sbatch_gather_vs_results.sh (iter=2) -> output.gather.iter2.log
+[2026-08-19 16:42:15]   job id: 251511.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+[2026-08-19 16:42:15]   waiting on job 251511
+[2026-08-19 16:42:45]   job 251511 finished
+[2026-08-19 16:42:45]   GATE OK: E3L_6DO3_train2_vs_results.feather
+[2026-08-19 16:42:45] --- stage 2: augment (iter=2)
+[2026-08-19 16:42:45]   qsub sbatch_augment_results.sh (iter=2) -> output.augment.iter2.log
+[2026-08-19 16:42:45]   job id: 251512.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+[2026-08-19 16:42:45]   waiting on job 251512
+[2026-08-19 16:45:15]   job 251512 finished
+[2026-08-19 16:45:16]   GATE OK: E3L_6DO3_train2_vs_results.aug.feather
+[2026-08-19 16:45:16] --- stage 3: train (iter=2)
+[2026-08-19 16:45:16]   qsub sbatch_train.sh (iter=2) -> output.train.iter2.log
+[2026-08-19 16:45:16]   job id: 251513.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+[2026-08-19 16:45:16]   waiting on job 251513
+[2026-08-19 16:45:46]   job 251513 finished
+    [11] val_loss: 0.188411, accuracys: 0.860 0.904 0.928, precision: 0.158 0.189 0.226, recall: 0.469 0.323 0.229, roc_auc: 0.776, EFs: 10.816 7.138 5.646 2.248
+[2026-08-19 16:45:46]   GATE OK: model_2 written
+[2026-08-19 16:45:46] --- stage 4: predict (iter=2, 4 single-process jobs)
+251514.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+251515.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+251517.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+251518.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+[2026-08-19 16:48:47]   submitted 4 predict jobs
+[2026-08-19 17:57:49]   GATE OK: 1348 prediction files
+[2026-08-19 17:57:49] --- stage 5: save top (iter=2)
+[2026-08-19 17:57:49]   qsub sbatch_save_top_prediction.sh (iter=2) -> output.savetop.iter2.log
+[2026-08-19 17:57:49]   job id: 251604.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+[2026-08-19 17:57:49]   waiting on job 251604
+[2026-08-19 18:00:19]   job 251604 finished
+[2026-08-19 18:00:19]   GATE OK: candidates selected for round 3
+[2026-08-19 18:00:19] --- stage 6: gen_3dstruct (iter=2 -> smiles_iter3)
+[2026-08-19 18:00:19]   qsub sbatch_gen_3dstruct.sh (iter=2) -> output.gen3d.iter2.log
+[2026-08-19 18:00:20]   job id: 251610.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+[2026-08-19 18:00:20]   waiting on job 251610
+[2026-08-19 18:12:15] =========== CYCLE 2  (dock round 2, leaves train3_params) ===========
+[2026-08-19 18:12:15] queue=preemptable  walltime=06:00:00
+[2026-08-19 18:12:15] --- prechecks for docking round 2
+[2026-08-19 18:12:16]   GATE OK: 16362 params for round 2
+[2026-08-19 18:12:20] --- docking round 2 already done (16362 of 16362 ligands), skipping to stage 1
+[2026-08-19 18:12:20] --- stage 1: gather (iter=2)
+[2026-08-19 18:12:20]   removing stale E3L_6DO3_train2_vs_results.feather
+[2026-08-19 18:12:20]   qsub sbatch_gather_vs_results.sh (iter=2) -> output.gather.iter2.log
+[2026-08-19 18:12:21]   job id: 251765.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+[2026-08-19 18:12:21]   waiting on job 251765
+[2026-08-19 18:14:51]   job 251765 finished
+[2026-08-19 18:15:07]   GATE OK: E3L_6DO3_train2_vs_results.feather has 16362 rows
+[2026-08-19 18:15:07] --- stage 2: augment (iter=2)
+[2026-08-19 18:15:07]   qsub sbatch_augment_results.sh (iter=2) -> output.augment.iter2.log
+[2026-08-19 18:15:07]   job id: 251800.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+[2026-08-19 18:15:07]   waiting on job 251800
+[2026-08-19 18:15:37]   job 251800 finished
+[2026-08-19 18:15:53]   GATE OK: E3L_6DO3_train2_vs_results.aug.feather has 16362 rows
+[2026-08-19 18:15:53] --- stage 3: train (iter=2)
+[2026-08-19 18:15:53]   qsub sbatch_train.sh (iter=2) -> output.train.iter2.log
+[2026-08-19 18:15:54]   job id: 251813.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+[2026-08-19 18:15:54]   waiting on job 251813
+[2026-08-19 18:20:24]   job 251813 finished
+    [8] val_loss: 0.172279, accuracys: 0.856 0.915 0.938, precision: 0.154 0.201 0.236, recall: 0.470 0.278 0.150, roc_auc: 0.789, EFs: 10.816 6.273 5.148 2.334
+[2026-08-19 18:20:24]   GATE OK: model_2 written
+[2026-08-19 18:20:24] --- stage 4: predict (iter=2, 4 single-process jobs)
+251872.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+251881.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+251893.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+251903.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+[2026-08-19 18:23:25]   submitted 4 predict jobs
+[2026-08-19 23:08:35]   GATE OK: 5458 prediction files
+[2026-08-19 23:08:35] --- stage 5: save top (iter=2)
+[2026-08-19 23:08:35]   qsub sbatch_save_top_prediction.sh (iter=2) -> output.savetop.iter2.log
+[2026-08-19 23:08:36]   job id: 257350.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+[2026-08-19 23:08:36]   waiting on job 257350
+[2026-08-19 23:19:06]   job 257350 finished
+[2026-08-19 23:19:06]   GATE OK: candidates selected for round 3
+[2026-08-19 23:19:06] --- stage 6: gen_3dstruct (iter=2 -> smiles_iter3)
+[2026-08-19 23:19:06]   qsub sbatch_gen_3dstruct.sh (iter=2) -> output.gen3d.iter2.log
+[2026-08-19 23:19:06]   job id: 257377.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+[2026-08-19 23:19:06]   waiting on job 257377
+[2026-08-19 23:21:36]   job 257377 finished
+[2026-08-19 23:22:07]   waiting on child job(s) matching 'gen3d'
+[2026-08-20 08:16:38]   child job(s) 'gen3d' finished
+[2026-08-20 08:16:38]   GATE OK: 18 mol2 files, none empty
+[2026-08-20 08:16:38] --- stage 7: gen_params (iter=3 -> train3_params)
+[2026-08-20 08:16:38]   qsub sbatch_gen_params.sh (iter=3) -> output.genparams.iter3.log
+[2026-08-20 08:16:39]   job id: 285079.crux-pbs-0001.head.cm.crux.alcf.anl.gov
+[2026-08-20 08:16:39]   waiting on job 285079
+[2026-08-20 08:21:09]   job 285079 finished
+[2026-08-20 08:21:09]   GATE OK: 16329 params ready for round 3
+[2026-08-20 08:21:09] =========== CYCLE 2 COMPLETE ===========
+[2026-08-20 08:21:09] next: bash run_cycle.sh 3
+OpenVS iteration 2 report - Thu Aug 20 08:21:09 AM UTC 2026
+experiment: /lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/OpenVS-main/experiments/E3L_6DO3
+------------------------------------------------------------
+1. CONFIG FILES
+  [ OK ] config_clusterdb.json
+  [ OK ] config_real_db.json
+    database_type    real
+    train_size       16000
+    test_size        32000
+    val_size         32000
+    fps_path         /lus/eagle/projects/marP_TB_VLS/shared_databases/real/fingerprints/split
+    prediction_path  /lus/eagle/projects/marP_TB_VLS/WC/williamhconrad4/OpenVS-main/experiments/E3L_6DO3/scratch/predictions_real_db
+------------------------------------------------------------
+2. DOCKING OUTPUT
+  train1         320 score files,   16011 distinct ligands
+  test           640 score files,   32001 distinct ligands
+  validation     639 score files,   31951 distinct ligands
+  train2         328 score files,   16362 distinct ligands
+------------------------------------------------------------
+3. GATHERED / AUGMENTED
+  E3L_6DO3_train1_vs_results.feather             16011 rows
+  E3L_6DO3_train1_vs_results.aug.feather         16010 rows
+  E3L_6DO3_test_vs_results.feather               32001 rows
+  E3L_6DO3_test_vs_results.aug.feather           32000 rows
+  E3L_6DO3_validation_vs_results.feather         31951 rows
+  E3L_6DO3_validation_vs_results.aug.feather     31950 rows
+------------------------------------------------------------
+4. MODEL
+  [ OK ] model_2/vanilla_model_best.pt
+    size 242M
+    from output.train.iter2.log:
+      [8] test_loss: 0.176788, accuracys: 0.854 0.912 0.936, precision: 0.158 0.205 0.248, recall: 0.459 0.278 0.151, roc_auc: 0.788, EFs: 4.105 6.363 5.049 2.328
+      [8] val_loss: 0.172279, accuracys: 0.856 0.915 0.938, precision: 0.154 0.201 0.236, recall: 0.470 0.278 0.150, roc_auc: 0.789, EFs: 10.816 6.273 5.148 2.334
+      Early stopping. Best epoch: 5
+------------------------------------------------------------
+5. LIBRARY-WIDE PREDICTION
+  Enamine_REAL_136M             5458 prediction files
+------------------------------------------------------------
+6. SELECTED CANDIDATES
+  [ OK ] all.top.feather
+  [ OK ] all.random.feather
+------------------------------------------------------------
+7. TOP 20 BY LIBRARY-WIDE PREDICTION (p_hits)
+  rank   p_hits  molecule_id                              smiles
+     1   0.9632  m_279130____28136988____28166844____2819 CC1=NNC(C)=C1CC(C)C(=O)N1CCC2(CCC(C3=CN(CCC4=CC=C(
+     2   0.9628  m_279130____28136948____28162212____2819 CC1=CC=C(O)C(CN2C=C(C(CC3=CC=CC=C3)NC(=O)C3=CN(C)N
+     3   0.9596  m_279130____28098184____28139574____2819 CCOCC1=NN=C2CN(C(=O)C3=CC=CN3CCCC3=CN(CC4=CC=CC=C4
+     4   0.9595  m_276450____27870554____27811590____1421 CC1=NC(NC2CC3CCCC(C2)N3C(=O)CC2=CNC3=CC=C(O)C=C23)
+     5   0.9594  s_2708____1290140____23984482            CC1=CC=CC(NC(=O)COC2=CC=C(CCNC(=O)N(C)C(C)CC3=CC=C
+     6   0.9568  m_279130____28136968____28611644____2819 CC1=CC=C(O)C(CN2C=C(C(CC3=CC=C(F)C=C3)N(C)C(=O)CC3
+     7   0.9429  m_282030____21925098____22359986____2197 CN(C[C@H]1C[C@@H](OC(C)(C)C)C1)C1=NC(N2CCOC(C3=NC(
+     8   0.9426  m_279130____28136776____28167336____2819 CC1=CC=CC=C1C1(C(=O)N(C)CC2=CN(CC3=CN(C[C@@H](O)C4
+     9   0.9409  m_283351____29878630____29862200____2986 CC1CN(C(=O)CCCC(=O)NCCC2=CC=CC=C2)CC(CCN2CC3=CC(O)
+    10   0.9373  m_279130____28121686____28595644____2819 CC(=O)C1=CC=C(CN2C=C(C3=CC=CC(C4(C(=O)NNC(=O)NC5CC
+    11   0.9352  s_271948____9941506____9923860           CC1=CC=C(CC(NC(=O)C(=O)NCC2=CC=CC(C(=O)NCC3=CC=CO3
+    12   0.9350  m_279130____28137044____28170706____2819 CC1=C(C(=O)NCC2=CC=C(C3=CN(C4=CC=C5C=NNC5=C4)N=N3)
+    13   0.9345  m_279130____28093908____28139572____2819 O=C(NCCC1=CC=C2NN=CC2=C1)C1=CN(CC2=CN(CC3=CC=C(O)N
+    14   0.9287  m_282030____21932898____22360252____2193 CC1=NC(C2=CC=C(CNC3=NC(N4CCC5=C(C4)C(F)=CC=C5)=C4C
+    15   0.9286  m_274552____24795528____25010746____1597 O=C(CN1N=CC=N1)N[C@H](CC1=CC=C(OCC2=CC=CC=C2)C=C1)
+    16   0.9282  m_279130____28137124____28169122____2819 O=C(NC(CC1=CC=CC=C1)CC1=CN(CC2=CC=CC=C2O)N=N1)C1CC
+    17   0.9275  m_282490____23945182____23974940____3029 CC1=CC=C(CCNC(=O)C(C2=NNC(C(C)(C)C)=C2)N2CCC(C3=NC
+    18   0.9265  m_282490____23964014____23975292____3029 CCN1N=CC=C1C(C(=O)NCCCC1=CC=CC=C1)N1CCC(C2=NC(C3=C
+    19   0.9260  m_283351____29890946____29862218____2986 CC1=CC=C2C(=O)N(C(C)C(=O)NCCNC(=O)CCCN3CC4=C(C=CC=
+    20   0.9238  m_280190____19266568____28051386____1806 O=C(O)C1=CC=CC(C2=CN(C[C@H]3CCC[C@@H]3C(=O)NCC3=CC
+------------------------------------------------------------
+8. TOP 20 DOCKING HITS (by dG), with p_hits where available
+  rank         dG   p_hits  set         ligand
+     1    -18.884        -  train2      m_282030____21932544____22360208____21971448
+     2    -17.329        -  train2      m_276010____24753872____17262266____24752132
+     3    -14.981        -  train2      m_282030____21909444____22360208____21957164
+     4    -14.347        -  train2      s_282730____26154322____26268918____26153928
+     5    -14.137        -  train2      m_274552____23521652____24971376____13453910
+     6    -13.970        -  train2      m_275592____19666570____13187062____15858244
+     7    -13.702        -  train2      m_274552____19121922____24976644____25062330
+     8    -13.693        -  train2      m_282155____26912850____26906158____26908648
+     9    -13.687        -  train2      m_274860____24710826____17195230____23196660
+    10    -13.328        -  train2      m_275592____76067068____18927710____25328750
+    11    -13.303        -  train2      m_279130____30356228____28153926____28194496
+    12    -12.985        -  train2      m_282030____21894420____22003036____21964664
+    13    -12.726        -  train2      s_2708____2678718____23878666
+    14    -12.695        -  train2      m_274552____18613076____24966594____25046996
+    15    -12.502        -  train2      m_279130____28137336____28145818____28194784
+    16    -12.406        -  train2      m_274860____17149750____17191386____23196660
+    17    -12.339        -  train2      m_280190____19306080____19340468____18086672
+    18    -12.186        -  train2      m_280710____31589476____44051014____31745016
+    19    -12.158        -  train2      s_11____25832492____30759212
+    20    -12.096        -  train2      m_275592____27047778____18934300____15858402
+
+  (dG is Rosetta's estimate; more negative = tighter. n=96,322 unique ligands)
+  '-' in p_hits means the ligand is not in this iteration's top set --
+  expected for iteration 1, where docking used centroids and prediction used REAL.
+------------------------------------------------------------
+report complete

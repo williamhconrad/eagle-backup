@@ -37,6 +37,14 @@ QUEUE="${OPENVS_QUEUE:-preemptable}"
 WALL="${OPENVS_WALLTIME:-06:00:00}"
 POLL=120
 
+
+# Row count in a feather file, or 0 if unreadable. Gating on existence alone
+# let a just-written file pass before Lustre had flushed its contents, and
+# training silently used 16,010 rows instead of 32,372.
+nrows() {
+    python -c "import pandas as pd,sys;print(len(pd.read_feather(sys.argv[1])))" "$1" 2>/dev/null || echo 0
+}
+
 log() { echo "[$(date '+%F %T')] $*"; }
 die() { echo; log "GATE FAILED: $*"; log "fix the cause, then re-run: bash run_cycle.sh $ITER"; exit 1; }
 
@@ -76,6 +84,18 @@ submit_wait() {           # submit_wait <script> <logfile> <iter>
 cd "$SCRIPTS" || die "cannot cd to $SCRIPTS"
 log "=========== CYCLE $ITER  (dock round $ITER, leaves train${NEXT}_params) ==========="
 log "queue=$QUEUE  walltime=$WALL"
+
+# --- node-hour accounting -------------------------------------------------
+if [ -f "$SCRIPTS/nodehours.sh" ]; then
+    . "$SCRIPTS/nodehours.sh"
+    nh_init "$ITER"
+    nh_mark "cycle_start"
+else
+    nh_init()    { :; }
+    nh_mark()    { :; }
+    nh_summary() { :; }
+    log "  nodehours.sh not found - node-hour tracking disabled"
+fi
 
 # ============================================================ DOCK ROUND N
 log "--- prechecks for docking round $ITER"
@@ -153,6 +173,7 @@ nlig=$(grep -h '^SCORE:' "$OUT"/*.score.sc 2>/dev/null \
        | awk '$2!="total_score" && $(NF-1)!="LG1"{print $(NF-1)}' | sort -u | wc -l)
 [ "$nlig" -gt 100 ] || die "only $nlig distinct ligands docked - check $OUT"
 log "  GATE OK: $nlig distinct ligands docked"
+nh_mark "docking"
 
 cd "$EXP/screening/outputs" || die
 if [ ! -f "$EXP/scratch/results/${PROJ}_train${ITER}.tar" ]; then
@@ -171,14 +192,20 @@ G="$EXP/screening/outputs/${PROJ}_train${ITER}_vs_results.feather"
 # gather skips any set whose .feather already exists, so clear a stale one
 [ -f "$G" ] && { log "  removing stale $(basename "$G")"; rm -f "$G"; }
 submit_wait sbatch_gather_vs_results.sh "output.gather.iter${ITER}.log" "$ITER"
-[ -f "$G" ] || die "gather produced no $(basename "$G")"
-log "  GATE OK: $(basename "$G")"
+sleep 15
+n_gat=$(nrows "$G")
+[ "$n_gat" -gt 100 ] || die "gather produced $n_gat rows in $(basename "$G")"
+log "  GATE OK: $(basename "$G") has $n_gat rows"
+nh_mark "stage1_gather"
 
 log "--- stage 2: augment (iter=$ITER)"
 A="$EXP/screening/outputs/${PROJ}_train${ITER}_vs_results.aug.feather"
 submit_wait sbatch_augment_results.sh "output.augment.iter${ITER}.log" "$ITER"
-[ -f "$A" ] || die "augment produced no $(basename "$A")"
-log "  GATE OK: $(basename "$A")"
+sleep 15                      # let Lustre flush before reading
+n_aug=$(nrows "$A")
+[ "$n_aug" -gt 100 ] || die "augment produced $n_aug rows in $(basename "$A")"
+log "  GATE OK: $(basename "$A") has $n_aug rows"
+nh_mark "stage2_augment"
 
 log "--- stage 3: train (iter=$ITER)"
 submit_wait sbatch_train.sh "output.train.iter${ITER}.log" "$ITER"
@@ -186,6 +213,7 @@ M="$EXP/models/model_${ITER}/vanilla_model_best.pt"
 [ -f "$M" ] || die "training produced no model_${ITER}"
 grep -E 'roc_auc' "output.train.iter${ITER}.log" | tail -1 | sed 's/^/    /'
 log "  GATE OK: model_${ITER} written"
+nh_mark "stage3_train"
 
 log "--- stage 4: predict (iter=$ITER, 4 single-process jobs)"
 PD="$EXP/scratch/predictions_real_db/model_${ITER}_prediction"
@@ -201,6 +229,7 @@ while qstat -u "$USER" 2>/dev/null | grep -q 'predict_a'; do sleep "$POLL"; done
 NP=$(ls "$PD"/*/*.feather 2>/dev/null | wc -l)
 [ "$NP" -gt 1000 ] || die "only $NP prediction files in $PD"
 log "  GATE OK: $NP prediction files"
+nh_mark "stage4_predict"
 
 log "--- stage 5: save top (iter=$ITER)"
 submit_wait sbatch_save_top_prediction.sh "output.savetop.iter${ITER}.log" "$ITER"
@@ -208,6 +237,7 @@ T="$PD/top_predictions"
 [ -f "$T/all.top.feather" ]    || die "no all.top.feather"
 [ -f "$T/all.random.feather" ] || die "no all.random.feather"
 log "  GATE OK: candidates selected for round $NEXT"
+nh_mark "stage5_savetop"
 
 # ======================================================== STAGE 6: 3D STRUCT
 log "--- stage 6: gen_3dstruct (iter=$ITER -> smiles_iter${NEXT})"
@@ -227,6 +257,7 @@ fi
 [ "$n_mol2" -gt 0 ]  || die "no mol2 files in $MOL2"
 [ "$n_empty" -eq 0 ] || die "$n_empty EMPTY mol2 files in $MOL2 (see *.err there)"
 log "  GATE OK: $n_mol2 mol2 files, none empty"
+nh_mark "stage6_gen3d"
 
 # ========================================================= STAGE 7: PARAMS
 log "--- stage 7: gen_params (iter=$NEXT -> train${NEXT}_params)"
@@ -242,7 +273,9 @@ else
 fi
 [ "$n_next" -gt 100 ] || die "only $n_next params in $NPDIR"
 log "  GATE OK: $n_next params ready for round $NEXT"
+nh_mark "stage7_genparams"
 
 log "=========== CYCLE $ITER COMPLETE ==========="
+nh_summary
 log "next: bash run_cycle.sh $NEXT"
 [ -f "$SCRIPTS/report_iteration.sh" ] && bash "$SCRIPTS/report_iteration.sh" "$ITER"
